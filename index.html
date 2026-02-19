@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-th"></i> Kanban Board</h1>
+                <p>Organize your tasks efficiently</p>
+            </div>
+        </header>
+
+        <!-- Task Input Section -->
+        <section class="input-section">
+            <div class="input-container">
+                <h2>Create New Task</h2>
+                <form id="taskForm" class="task-form">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="taskTitle" 
+                            class="input-field" 
+                            placeholder="Task title (e.g., Fix bugs, Design UI)"
+                            required
+                            autocomplete="off"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <textarea 
+                            id="taskDesc" 
+                            class="input-field" 
+                            placeholder="Task description (optional)"
+                            rows="2"
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn-add">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Board Stats -->
+        <section class="stats-section">
+            <div class="stat-item">
+                <i class="fas fa-tasks"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Total Tasks</span>
+                    <span class="stat-value" id="totalTasks">0</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-circle-notch"></i>
+                <div class="stat-info">
+                    <span class="stat-label">In Progress</span>
+                    <span class="stat-value" id="inProgressCount">0</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-check-circle"></i>
+                <div class="stat-info">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-value" id="completedCount">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kanban Board -->
+        <section class="board-section">
+            <div class="kanban-board">
+                <!-- To Do Column -->
+                <div class="column" id="todoColumn" data-status="todo">
+                    <div class="column-header">
+                        <h2><i class="fas fa-circle" style="font-size: 8px;"></i> To Do</h2>
+                        <span class="task-count" id="todoCount">0</span>
+                    </div>
+                    <div class="tasks-container" id="todoContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>No tasks yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- In Progress Column -->
+                <div class="column" id="inProgressColumn" data-status="inprogress">
+                    <div class="column-header">
+                        <h2><i class="fas fa-circle" style="font-size: 8px;"></i> In Progress</h2>
+                        <span class="task-count" id="inProgressCountCol">0</span>
+                    </div>
+                    <div class="tasks-container" id="inProgressContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-spinner"></i>
+                            <p>No tasks yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Done Column -->
+                <div class="column" id="doneColumn" data-status="done">
+                    <div class="column-header">
+                        <h2><i class="fas fa-circle" style="font-size: 8px;"></i> Done</h2>
+                        <span class="task-count" id="doneCount">0</span>
+                    </div>
+                    <div class="tasks-container" id="doneContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-check"></i>
+                            <p>No tasks completed yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clear All Section -->
+        <section class="action-section">
+            <button class="btn-clear-all" id="clearAllBtn">
+                <i class="fas fa-trash-alt"></i> Clear All Tasks
+            </button>
+            <button class="btn-export" id="exportBtn">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+        </section>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h2>Confirm Action</h2>
+            <p id="modalMessage">Are you sure?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="modalCancel">Cancel</button>
+                <button class="btn-confirm" id="modalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
